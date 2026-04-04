@@ -51,7 +51,7 @@ export default function Footer() {
             </Link>
             
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Burgers faits maison • 90% ingrédients locaux 🇲🇦<br />
+              Burgers faits maison • 90% ingrédients locaux<br />
               Viande fraîche, pains artisanaux, sauces exclusives.
             </p>
             
