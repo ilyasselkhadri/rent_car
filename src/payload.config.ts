@@ -37,7 +37,7 @@ export default buildConfig({
       collections: {
         media: true, // active pour la collection "media"
       },
-      bucket: process.env.SUPABASE_BUCKET_NAME || 'smoky-burgers-media',
+      bucket: process.env.SUPABASE_BUCKET_NAME || 'dghmira-media',
       config: {
         endpoint: process.env.SUPABASE_S3_ENDPOINT, // URL S3 de Supabase
         credentials: {

@@ -190,7 +190,7 @@ export interface Media {
   };
 }
 /**
- * Gérez les plats du restaurant
+ * Gérez les plats du restaurant Dghmira
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menu".
@@ -199,18 +199,16 @@ export interface Menu {
   id: number;
   nom: string;
   categorie:
+    | 'promotions'
     | 'top_ventes'
     | 'entrees'
-    | 'burgers_beef_seul'
-    | 'burger_beef_menu'
-    | 'burgers_chicken_seul'
-    | 'burger_chicken_menu'
-    | 'burgers_veggie_seul'
-    | 'burger_veggie_menu'
-    | 'frites'
-    | 'homemade_sauce'
-    | 'desserts'
-    | 'boissons_jus';
+    | 'formules'
+    | 'sandwicherie'
+    | 'pastillas'
+    | 'sandwichs_tajines'
+    | 'tajines_viande'
+    | 'tajines_poulet'
+    | 'boissons';
   prix: number;
   /**
    * Laissez vide si pas de promotion
@@ -232,7 +230,7 @@ export interface Menu {
       }[]
     | null;
   /**
-   * Ex: suppléments, sauces, etc.
+   * Ex: suppléments, pains, sauces, etc.
    */
   options?:
     | {

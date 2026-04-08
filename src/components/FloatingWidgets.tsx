@@ -216,12 +216,12 @@ export default function FloatingWidgets() {
       {status === 'loading' && (
         <div className="bg-white rounded-lg shadow-xl border border-gray-100 p-3 w-52">
           <div className="flex items-center gap-2 mb-2">
-            <Loader2 size={14} className="text-red-500 animate-spin flex-shrink-0" />
+            <Loader2 size={14} className="text-[#3d7a35] animate-spin flex-shrink-0" />
             <span className="text-xs text-gray-600">Traduction… {progress}%</span>
           </div>
           <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
             <div
-              className="h-full bg-red-500 rounded-full transition-all duration-300"
+              className="h-full bg-[#3d7a35] rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -261,12 +261,12 @@ export default function FloatingWidgets() {
                   className="w-5 h-5 object-cover rounded-sm"
                 />
                 <span className={`text-sm flex-1 ${
-                  lang.code === currentLang.code ? 'text-red-500 font-semibold' : 'text-gray-700'
+                  lang.code === currentLang.code ? 'text-[#3d7a35] font-semibold' : 'text-gray-700'
                 }`}>
                   {formatLabel(lang.label)}
                 </span>
                 {lang.code === currentLang.code && (
-                  <Check size={13} className="text-red-500" />
+                  <Check size={13} className="text-[#3d7a35]" />
                 )}
               </button>
             ))}
@@ -276,7 +276,7 @@ export default function FloatingWidgets() {
               <div className="border-t border-gray-100 px-4 py-2.5">
                 <button
                   onClick={() => handleSelect(languages[0])}
-                  className="flex items-center gap-2 text-xs text-gray-400 hover:text-red-500 transition-colors"
+                  className="flex items-center gap-2 text-xs text-gray-400 hover:text-[#3d7a35] transition-colors"
                 >
                   <RotateCcw size={11} />
                   Revenir au français
@@ -294,11 +294,11 @@ export default function FloatingWidgets() {
             border rounded-lg px-3 py-2.5 shadow-lg transition-all duration-300
             ${status === 'loading'
               ? 'border-gray-100 opacity-60 cursor-not-allowed'
-              : 'border-gray-200 hover:shadow-xl hover:border-red-500/50 cursor-pointer'
+              : 'border-gray-200 hover:shadow-xl hover:border-[#3d7a35]/50 cursor-pointer'
             }`}
         >
           {status === 'loading'
-            ? <Loader2 size={18} className="text-red-500 animate-spin" />
+            ? <Loader2 size={18} className="text-[#3d7a35] animate-spin" />
             : <img 
                 src={currentLang.flag} 
                 alt={currentLang.label} 

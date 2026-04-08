@@ -2,30 +2,31 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react'
 import Image from 'next/image'
+import { Flame, Clock, Truck, Award, MapPin, Phone } from 'lucide-react'
 
-// ─── Image sets per section - 5 images each for burger restaurant ────────────────
+// ─── Image sets per section ────────────────
 const missionImages = [
-  { src: '/burger1.jpeg', alt: 'Smoky Burger signature' },
-  { src: '/burger2.jpeg', alt: 'Burger artisanal avec frites' },
-  { src: '/burger3.jpeg', alt: 'Burger double viande' },
-  { src: '/burger4.jpeg', alt: 'Burger avec sauce maison' },
-  { src: '/burger5.jpeg', alt: 'Assiette de burgers' },
+  { src: '/img2.jpeg', alt: 'Tajine traditionnel marocain' },
+  { src: '/img7.jpeg', alt: 'Couscous royal' },
+  { src: '/img12.jpeg', alt: 'Pastilla marocaine' },
+  { src: '/img13.jpeg', alt: 'Mechoui traditionnel' },
+  { src: '/img15.jpeg', alt: 'Thé à la menthe et pâtisseries' },
 ]
 
 const storyImages = [
-  { src: '/cuisine1.jpeg', alt: 'Cuisine ouverte et propre' },
-  { src: '/cuisine2.PNG', alt: 'Préparation artisanale' },
-  { src: '/cuisine3.PNG', alt: 'Ingrédients frais locaux' },
-  { src: '/cuisine4.PNG', alt: 'Chef au travail' },
-  { src: '/cuisine5.PNG', alt: 'Atmosphère chaleureuse' },
+  { src: '/img1.jpeg', alt: 'Cuisine marocaine authentique' },
+  { src: '/img11.jpeg', alt: 'Préparation artisanale' },
+  { src: '/img5.jpeg', alt: 'Épices marocaines' },
+  { src: '/img4.jpeg', alt: 'Chef au travail' },
+  { src: '/img9.jpeg', alt: 'Atmosphère chaleureuse' },
 ]
 
 const whyImages = [
-  { src: '/img5.jpeg', alt: 'Produits locaux marocains' },
-  { src: '/img2.jpeg', alt: 'Viande fraîche qualité supérieure' },
-  { src: '/img4.jpeg', alt: 'Pain artisanal fait maison' },
-  { src: '/img3.jpeg', alt: 'Sauces exclusives' },
-  { src: '/img1.jpeg', alt: 'Ingrédients 90% locaux' },
+  { src: '/img3.jpeg', alt: 'Produits locaux marocains' },
+  { src: '/img14.jpeg', alt: 'Viande halal qualité supérieure' },
+  { src: '/img8.jpeg', alt: 'Pain artisanal fait maison' },
+  { src: '/img6.jpeg', alt: 'Recettes traditionnelles' },
+  { src: '/img10.jpeg', alt: 'Épices authentiques' },
 ]
 
 // ─── Auto-rotating image carousel ─────────────────────────
@@ -79,8 +80,8 @@ function ImageCarousel({ images, interval = 5000 }: { images: { src: string; alt
       ))}
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10 pointer-events-none" />
-      {/* Red border */}
-      <div className="absolute inset-0 rounded-2xl z-20 pointer-events-none" style={{ boxShadow: 'inset 0 0 0 1px rgba(239,68,68,0.35)' }} />
+      {/* Orange border */}
+      <div className="absolute inset-0 rounded-2xl z-20 pointer-events-none" style={{ boxShadow: 'inset 0 0 0 1px rgba(232,130,12,0.35)' }} />
       {/* Dots */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-30">
         {images.map((_, idx) => (
@@ -91,7 +92,7 @@ function ImageCarousel({ images, interval = 5000 }: { images: { src: string; alt
             style={{
               width: idx === current ? '24px' : '8px',
               height: '8px',
-              background: idx === current ? '#ef4444' : 'rgba(255,255,255,0.5)',
+              background: idx === current ? '#e8820c' : 'rgba(255,255,255,0.5)',
             }}
           />
         ))}
@@ -109,7 +110,7 @@ function CheckItem({ text }: { text: string }) {
   return (
     <div className="flex items-start gap-4 group">
       <div className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5 transition-all duration-300 group-hover:scale-110"
-        style={{ background: 'linear-gradient(135deg, #ef4444, #f97316)' }}>
+        style={{ background: 'linear-gradient(135deg, #3d7a35, #e8820c)' }}>
         <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
           <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -121,15 +122,14 @@ function CheckItem({ text }: { text: string }) {
 
 // ─── Main ──────────────────────────────────────────────────
 export default function AboutSection() {
-  // Stocker les textes avec l'apostrophe normale dans le tableau
   const avantagesItems = [
-    "90% d'ingrédients locaux et frais",
-    "Cuisson au feu de bois pour un goût unique",
-    "Pains faits maison chaque matin",
-    "Frites coupées à la main",
-    "Sauces exclusives préparées sur place",
-    "Livraison rapide via Glovo & Jumia Food",
-    "Ouvert 7j/7 de 12h à 23h30",
+    "100% fait maison avec des recettes traditionnelles",
+    "Épices authentiques venues des souks marocains",
+    "Pains et pâtisseries préparés chaque matin",
+    "Viande halal de première qualité",
+    "Plats cuisinés avec amour comme à la maison",
+    "Livraison rapide partout à Casablanca",
+    "Ouvert 7j/7 de 12h à 23h",
   ]
 
   return (
@@ -138,24 +138,38 @@ export default function AboutSection() {
       className="relative py-24 overflow-hidden"
       style={{ background: 'linear-gradient(160deg, #fdfaf5 0%, #f8f4ed 40%, #fdfcf9 100%)' }}
     >
-      {/* Decorative blobs - rouge/orange */}
+      {/* Decorative blobs - vert/orange */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(239,68,68,0.06) 0%, transparent 70%)', transform: 'translate(30%, -30%)' }} />
+        style={{ background: 'radial-gradient(circle, rgba(61,122,53,0.06) 0%, transparent 70%)', transform: 'translate(30%, -30%)' }} />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(249,115,22,0.04) 0%, transparent 70%)', transform: 'translate(-30%, 30%)' }} />
+        style={{ background: 'radial-gradient(circle, rgba(232,130,12,0.04) 0%, transparent 70%)', transform: 'translate(-30%, 30%)' }} />
+
+      {/* Motif zellige décoratif */}
+      <div className="absolute inset-0 pointer-events-none opacity-5"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%233d7a35' stroke-width='0.5'%3E%3Cpolygon points='30,3 57,16.5 57,43.5 30,57 3,43.5 3,16.5'/%3E%3Cpolygon points='30,12 48,21 48,39 30,48 12,39 12,21'/%3E%3Ccircle cx='30' cy='30' r='6'/%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+          backgroundSize: '60px 60px',
+        }}
+      />
 
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
 
         {/* ── Header ── */}
         <div className="text-center mb-16">
+          <div className="flex justify-center items-center gap-3 mb-4">
+            <span className="text-[#e8820c] text-xl">✻</span>
+            <span className="text-xs font-bold tracking-[0.3em] uppercase text-gray-400">L'Âme du Maroc</span>
+            <span className="text-[#e8820c] text-xl">✻</span>
+          </div>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3"
-            style={{ fontFamily: 'Georgia, serif', letterSpacing: '-0.01em' }}>
-            <span className="border-b-2 border-red-500 pb-1">À propos de nous</span>
+            style={{ fontFamily: '"Times New Roman", Times, serif', letterSpacing: '2px' }}>
+            <span className="border-b-2 border-[#e8820c] pb-2">À propos de Dghmira</span>
           </h2>
           <div className="flex justify-center gap-2 mt-4">
-            <div className="w-1.5 h-1.5 rounded-full bg-red-500" />
-            <div className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-            <div className="w-1.5 h-1.5 rounded-full bg-red-500" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#3d7a35]" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#e8820c]" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#3d7a35]" />
           </div>
         </div>
 
@@ -163,16 +177,16 @@ export default function AboutSection() {
         <div className="grid md:grid-cols-2 gap-16 items-center mb-24">
           <div className="order-2 md:order-1">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-0.5" style={{ background: '#ef4444' }} />
+              <div className="w-8 h-0.5" style={{ background: '#e8820c' }} />
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-gray-400">Notre mission</span>
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
-              Le vrai goût du <span style={{ color: '#ef4444' }}>fait maison</span>
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
+              L'âme du Maroc <span style={{ color: '#e8820c' }}>à chaque bouchée</span>
             </h3>
             <div className="space-y-4 text-gray-600 leading-relaxed">
-              <p>Chez <strong className="text-red-600">Smoky Burgers</strong>, notre mission est simple : vous offrir <strong className="text-gray-800">le meilleur burger artisanal</strong> de Casablanca, préparé avec passion et des ingrédients locaux de première qualité.</p>
-              <p>Nous croyons qu&apos;un bon burger se fait avec des produits frais, une viande savoureuse et une sauce qui fait la différence. C&apos;est pourquoi nous utilisons <strong className="text-gray-800">90% d&apos;ingrédients locaux</strong> et préparons tout sur place.</p>
-              <p>Notre engagement : vous servir un burger authentique, généreux et savoureux, dans une ambiance chaleureuse et décontractée.</p>
+              <p>Chez <strong className="text-[#3d7a35]">Dghmira</strong>, notre mission est simple : vous offrir <strong className="text-gray-800">le meilleur de la cuisine marocaine traditionnelle</strong>, préparée avec passion et des ingrédients locaux de première qualité.</p>
+              <p>Nous croyons que la vraie cuisine marocaine se fait avec des produits frais, des épices authentiques et beaucoup d'amour. C'est pourquoi nous utilisons <strong className="text-gray-800">100% d'ingrédients locaux</strong> et préparons tout sur place comme à la maison.</p>
+              <p>Notre engagement : vous faire voyager au cœur du Maroc à travers des plats généreux, savoureux et authentiques, dans une ambiance chaleureuse et traditionnelle.</p>
             </div>
           </div>
           <div className="order-1 md:order-2">
@@ -187,21 +201,21 @@ export default function AboutSection() {
           </div>
           <div className="order-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-0.5" style={{ background: '#ef4444' }} />
+              <div className="w-8 h-0.5" style={{ background: '#e8820c' }} />
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-gray-400">Notre histoire</span>
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
-              Nés d&apos;une <span style={{ color: '#ef4444' }}>passion</span> pour le burger
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
+              Nés d'une <span style={{ color: '#e8820c' }}>passion</span> pour la tradition
             </h3>
-            <p className="text-gray-600 leading-relaxed mb-4">Smoky Burgers est né d&apos;une passion : celle du burger artisanal et du goût authentique. Après des années à chercher le burger parfait, nous avons décidé de créer le nôtre.</p>
+            <p className="text-gray-600 leading-relaxed mb-4">Dghmira est né d'une passion : celle de la cuisine marocaine authentique et du goût d'antan. Après des années à chercher les saveurs de notre enfance, nous avons décidé de les recréer pour vous.</p>
             <p className="text-gray-600 leading-relaxed mb-6">Notre promesse :</p>
             <div className="space-y-3 mb-6">
-              <CheckItem text="Burgers 100% faits maison" />
-              <CheckItem text="Viande fraîche grillée au feu de bois" />
-              <CheckItem text="Pains artisanaux préparés quotidiennement" />
-              <CheckItem text="90% d&apos;ingrédients locaux et marocains" />
-              <CheckItem text="Commandez sur Glovo, Jumia Food" />
-              <CheckItem text="Livraison gratuite" />
+              <CheckItem text="Plats 100% faits maison" />
+              <CheckItem text="Recettes traditionnelles marocaines" />
+              <CheckItem text="Épices authentiques des souks" />
+              <CheckItem text="100% d'ingrédients locaux" />
+              <CheckItem text="Commandez sur Glovo & Jumia Food" />
+              <CheckItem text="Livraison gratuite à Casablanca" />
             </div>
           </div>
         </div>
@@ -210,17 +224,17 @@ export default function AboutSection() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-0.5" style={{ background: '#ef4444' }} />
+              <div className="w-8 h-0.5" style={{ background: '#e8820c' }} />
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-gray-400">Nos avantages</span>
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
-              Pourquoi choisir <span style={{ color: '#ef4444' }}>Smoky Burgers ?</span>
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 leading-tight" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
+              Pourquoi choisir <span style={{ color: '#e8820c' }}>Dghmira ?</span>
             </h3>
             <div className="space-y-4">
               {avantagesItems.map((item, idx) => (
                 <div key={idx} className="flex items-center gap-4 group">
                   <div className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                    style={{ background: 'linear-gradient(135deg, #ef4444, #f97316)' }}>
+                    style={{ background: 'linear-gradient(135deg, #3d7a35, #e8820c)' }}>
                     <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
                       <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -229,15 +243,14 @@ export default function AboutSection() {
                 </div>
               ))}
             </div>
-            <div className="mt-6 pt-6 border-t border-gray-200">
-              <p className="text-gray-500 text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: "Notre objectif est simple : vous offrir l&apos;expérience burger la plus savoureuse et authentique de Casablanca, à chaque visite. Rejoignez les centaines de clients satisfaits qui font de Smoky Burgers leur restaurant préféré !" }} />
+            <div className="mt-8 pt-6 border-t border-gray-200">
+              <p className="text-gray-500 text-sm leading-relaxed">Notre objectif est simple : vous offrir l'expérience culinaire marocaine la plus authentique et savoureuse de Casablanca, à chaque visite. Rejoignez les milliers de clients satisfaits qui font de Dghmira leur restaurant préféré !</p>
             </div>
           </div>
           <div className="order-1 md:order-2">
             <ImageCarousel images={whyImages} interval={5000} />
           </div>
         </div>
-
       </div>
     </section>
   )

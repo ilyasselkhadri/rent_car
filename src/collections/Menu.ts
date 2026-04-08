@@ -9,7 +9,7 @@ export const Menu: CollectionConfig = {
   admin: {
     useAsTitle: 'nom',
     defaultColumns: ['nom', 'categorie', 'prix', 'disponible', 'popularite'],
-    description: 'Gérez les plats du restaurant',
+    description: 'Gérez les plats du restaurant Dghmira',
   },
   access: {
     read: () => true,
@@ -27,18 +27,16 @@ export const Menu: CollectionConfig = {
       label: 'Catégorie',
       required: true,
       options: [
+        { label: 'Promotions', value: 'promotions' },
         { label: 'Top des ventes', value: 'top_ventes' },
-        { label: 'Entrées', value: 'entrees' },
-        { label: 'Burgers Beef Seul', value: 'burgers_beef_seul' },
-        { label: 'Burger Beef Menu', value: 'burger_beef_menu' },
-        { label: 'Burgers Chicken Seul', value: 'burgers_chicken_seul' },
-        { label: 'Burger Chicken Menu', value: 'burger_chicken_menu' },
-        { label: 'Burgers Veggie Seul', value: 'burgers_veggie_seul' },
-        { label: 'Burger Veggie Menu', value: 'burger_veggie_menu' },
-        { label: 'Frites', value: 'frites' },
-        { label: 'Homemade Sauce (50gr)', value: 'homemade_sauce' },
-        { label: 'Desserts', value: 'desserts' },
-        { label: 'Boissons & Jus', value: 'boissons_jus' },
+        { label: 'Nos entrées', value: 'entrees' },
+        { label: 'Nos Formules', value: 'formules' },
+        { label: 'Sandwicherie Marocaine', value: 'sandwicherie' },
+        { label: 'Nos Pastillas', value: 'pastillas' },
+        { label: 'Sandwichs Tajines', value: 'sandwichs_tajines' },
+        { label: 'Tajines De Viande', value: 'tajines_viande' },
+        { label: 'Tajines Au Poulet', value: 'tajines_poulet' },
+        { label: 'Boissons', value: 'boissons' },
       ],
     },
     {
@@ -110,7 +108,7 @@ export const Menu: CollectionConfig = {
       type: 'array',
       label: 'Options de personnalisation',
       admin: {
-        description: 'Ex: suppléments, sauces, etc.',
+        description: 'Ex: suppléments, pains, sauces, etc.',
         initCollapsed: true,
       },
       fields: [

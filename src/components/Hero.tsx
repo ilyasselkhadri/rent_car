@@ -5,12 +5,12 @@ import { MapPin, Star } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 
 const IMAGES = [
-  '/herosmokyburgers.png',
-  '/img1.jpeg',
-  '/img2.jpeg',
-  '/img3.jpeg',
-  '/img4.jpeg',
-  '/img5.jpeg',
+  '/page0.jpeg',
+  '/page1.jpeg',
+  '/page2.jpeg',
+  '/page3.jpeg',
+  '/page4.jpeg',
+  '/page5.jpeg',
 ]
 
 export default function Hero() {
@@ -31,53 +31,37 @@ export default function Hero() {
     }, 1200)
   }
 
-  // Nettoyer et redémarrer l'intervalle
   const resetInterval = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-    }
+    if (intervalRef.current) clearInterval(intervalRef.current)
     intervalRef.current = setInterval(() => {
       goTo((current + 1) % IMAGES.length)
     }, 6000)
   }
 
-  // Détecter les changements de taille d'écran
   useEffect(() => {
     const handleResize = () => {
       const newWidth = window.innerWidth
       const wasMobile = viewportWidth < 768
       const isNowMobile = newWidth < 768
-      
       setViewportWidth(newWidth)
-      
-      // Si on passe de mobile à desktop ou vice-versa
       if (wasMobile !== isNowMobile) {
-        // Réinitialiser l'état du carrousel
         setCurrent(0)
         setPrev(null)
         setTransitioning(false)
-        
-        // Redémarrer l'intervalle
         resetInterval()
       }
     }
-
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [viewportWidth])
 
-  // Gestion de l'intervalle principal
   useEffect(() => {
     resetInterval()
-    
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-      }
+      if (intervalRef.current) clearInterval(intervalRef.current)
     }
   }, [current, transitioning])
 
-  // Alterne zoom-in / zoom-out selon l'index
   const getKenBurns = (index: number) =>
     index % 2 === 0 ? 'kenBurnsIn' : 'kenBurnsOut'
 
@@ -100,232 +84,172 @@ export default function Hero() {
           from { opacity: 0; }
           to   { opacity: 1; }
         }
-        
-        /* Animations ultra modernes */
-        @keyframes morphing {
+
+        /* Morphing doux */
+        @keyframes morphingTrad {
+          0%   { border-radius: 20px; transform: rotate(0deg) scale(1); }
+          25%  { border-radius: 28px 20px 28px 20px; transform: rotate(0.5deg) scale(1.01); }
+          50%  { border-radius: 20px 28px 20px 28px; transform: rotate(-0.5deg) scale(1.01); }
+          75%  { border-radius: 24px; transform: rotate(0.3deg) scale(1.01); }
+          100% { border-radius: 20px; transform: rotate(0deg) scale(1); }
+        }
+
+        /* Lueur verte et dorée */
+        @keyframes glowTrad {
           0% {
-            border-radius: 20px;
-            transform: rotate(0deg) scale(1);
+            box-shadow:
+              0 0 0 0 rgba(61, 122, 53, 0),
+              0 0 0 0 rgba(232, 130, 12, 0),
+              0 20px 25px -12px rgba(0,0,0,0.3);
           }
           25% {
-            border-radius: 30px 20px 30px 20px;
-            transform: rotate(1deg) scale(1.02);
+            box-shadow:
+              0 0 15px 4px rgba(61, 122, 53, 0.25),
+              0 0 30px 8px rgba(232, 130, 12, 0.2),
+              0 25px 35px -12px rgba(0,0,0,0.35);
           }
           50% {
-            border-radius: 20px 30px 20px 30px;
-            transform: rotate(-1deg) scale(1.01);
+            box-shadow:
+              0 0 25px 8px rgba(61, 122, 53, 0.35),
+              0 0 50px 15px rgba(232, 130, 12, 0.3),
+              0 30px 45px -12px rgba(0,0,0,0.4);
           }
           75% {
-            border-radius: 25px 25px 25px 25px;
-            transform: rotate(0.5deg) scale(1.02);
+            box-shadow:
+              0 0 15px 4px rgba(61, 122, 53, 0.25),
+              0 0 30px 8px rgba(232, 130, 12, 0.2),
+              0 25px 35px -12px rgba(0,0,0,0.35);
           }
           100% {
-            border-radius: 20px;
-            transform: rotate(0deg) scale(1);
+            box-shadow:
+              0 0 0 0 rgba(61, 122, 53, 0),
+              0 0 0 0 rgba(232, 130, 12, 0),
+              0 20px 25px -12px rgba(0,0,0,0.3);
           }
         }
-        
-        @keyframes neonPulse {
-          0% {
-            box-shadow: 
-              0 0 0 0 rgba(220, 38, 38, 0),
-              0 0 0 0 rgba(234, 88, 12, 0),
-              0 20px 25px -12px rgba(0, 0, 0, 0.2);
-          }
-          25% {
-            box-shadow: 
-              0 0 20px 5px rgba(220, 38, 38, 0.3),
-              0 0 40px 10px rgba(234, 88, 12, 0.2),
-              0 25px 35px -12px rgba(0, 0, 0, 0.3);
-          }
-          50% {
-            box-shadow: 
-              0 0 30px 10px rgba(220, 38, 38, 0.5),
-              0 0 60px 20px rgba(234, 88, 12, 0.3),
-              0 30px 45px -12px rgba(0, 0, 0, 0.4);
-          }
-          75% {
-            box-shadow: 
-              0 0 20px 5px rgba(220, 38, 38, 0.3),
-              0 0 40px 10px rgba(234, 88, 12, 0.2),
-              0 25px 35px -12px rgba(0, 0, 0, 0.3);
-          }
-          100% {
-            box-shadow: 
-              0 0 0 0 rgba(220, 38, 38, 0),
-              0 0 0 0 rgba(234, 88, 12, 0),
-              0 20px 25px -12px rgba(0, 0, 0, 0.2);
-          }
+
+        /* Flottement 3D */
+        @keyframes floatTrad {
+          0%   { transform: translateY(0px) translateZ(0px); }
+          25%  { transform: translateY(-8px) translateZ(15px); }
+          50%  { transform: translateY(0px) translateZ(0px); }
+          75%  { transform: translateY(4px) translateZ(8px); }
+          100% { transform: translateY(0px) translateZ(0px); }
         }
-        
-        @keyframes float3D {
-          0% {
-            transform: translateY(0px) translateZ(0px) rotateX(0deg);
-          }
-          25% {
-            transform: translateY(-10px) translateZ(20px) rotateX(2deg);
-          }
-          50% {
-            transform: translateY(0px) translateZ(0px) rotateX(0deg);
-          }
-          75% {
-            transform: translateY(5px) translateZ(10px) rotateX(-2deg);
-          }
-          100% {
-            transform: translateY(0px) translateZ(0px) rotateX(0deg);
-          }
+
+        /* Dégradé vert et orange */
+        @keyframes gradientTrad {
+          0%   { background-position: 0% 50%; }
+          50%  { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
         }
-        
-        @keyframes spinSlow {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
+
+        /* Rotation des particules */
+        @keyframes particleRotateTrad {
+          0%   { transform: rotate(0deg) scale(1);   opacity: 0.4; }
+          50%  { transform: rotate(180deg) scale(1.3); opacity: 0.7; }
+          100% { transform: rotate(360deg) scale(1);  opacity: 0.4; }
         }
-        
-        @keyframes gradientShift {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
-        
-        @keyframes textGlitch {
-          0%, 100% {
-            text-shadow: 2px 0 0 rgba(220, 38, 38, 0), -2px 0 0 rgba(234, 88, 12, 0);
-          }
-          25% {
-            text-shadow: 3px 0 0 rgba(220, 38, 38, 0.5), -2px 0 0 rgba(234, 88, 12, 0.5);
-          }
-          50% {
-            text-shadow: -2px 0 0 rgba(220, 38, 38, 0.5), 3px 0 0 rgba(234, 88, 12, 0.5);
-          }
-          75% {
-            text-shadow: 2px 0 0 rgba(220, 38, 38, 0.5), -3px 0 0 rgba(234, 88, 12, 0.5);
-          }
-        }
-        
-        @keyframes particleRotate {
-          0% {
-            transform: rotate(0deg) scale(1);
-            opacity: 0.3;
-          }
-          50% {
-            transform: rotate(180deg) scale(1.5);
-            opacity: 0.6;
-          }
-          100% {
-            transform: rotate(360deg) scale(1);
-            opacity: 0.3;
-          }
-        }
-        
-        .logo-box-modern {
+
+        /* Logo box traditionnel - version verte */
+        .logo-box-trad {
           position: relative;
-          background: rgba(255, 255, 255, 0.95);
+          background: rgba(255, 255, 255, 0.97);
           backdrop-filter: blur(10px);
-          animation: float3D 4s ease-in-out infinite, neonPulse 3s ease-in-out infinite;
+          animation: floatTrad 4s ease-in-out infinite, glowTrad 3s ease-in-out infinite;
           transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
           transform-style: preserve-3d;
           perspective: 1000px;
+          border: 1px solid rgba(232, 130, 12, 0.3);
         }
-        
-        .logo-box-modern::before {
+
+        .logo-box-trad::before {
           content: '';
           position: absolute;
           inset: -2px;
-          background: linear-gradient(135deg, #dc2626, #ea580c, #f59e0b, #ea580c, #dc2626);
+          background: linear-gradient(135deg, #2d5a27, #e8820c, #f5a030, #3d7a35, #2d5a27);
           background-size: 300% 300%;
           border-radius: 22px;
           z-index: -1;
-          animation: gradientShift 3s ease infinite, morphing 6s ease-in-out infinite;
+          animation: gradientTrad 3s ease infinite, morphingTrad 6s ease-in-out infinite;
           opacity: 0;
           transition: opacity 0.3s ease;
         }
-        
-        .logo-box-modern:hover::before {
-          opacity: 1;
-        }
-        
-        .logo-box-modern:hover {
-          transform: scale(1.08) translateY(-8px) translateZ(30px);
+
+        .logo-box-trad:hover::before { opacity: 1; }
+
+        .logo-box-trad:hover {
+          transform: scale(1.05) translateY(-5px) translateZ(20px);
           background: rgba(255, 255, 255, 1);
-          backdrop-filter: blur(20px);
+          border-color: rgba(232, 130, 12, 0.6);
         }
-        
-        .logo-image-modern {
+
+        .logo-image-trad {
           transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        
-        .logo-box-modern:hover .logo-image-modern {
-          transform: scale(1.15) rotate(5deg);
-          filter: drop-shadow(0 0 8px rgba(220, 38, 38, 0.5));
+
+        .logo-box-trad:hover .logo-image-trad {
+          transform: scale(1.1) rotate(3deg);
+          filter: drop-shadow(0 0 6px rgba(61, 122, 53, 0.5));
         }
-        
-        .text-gradient-modern {
-          background: linear-gradient(135deg, #111 0%, #333 25%, #dc2626 50%, #333 75%, #111 100%);
+
+        /* Gradient texte vert */
+        .text-gradient-green {
+          background: linear-gradient(135deg, #1a3a16 0%, #2d5a27 25%, #3d7a35 50%, #2d5a27 75%, #1a3a16 100%);
           background-size: 300% auto;
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
-          animation: gradientShift 3s ease infinite, textGlitch 2s ease-in-out infinite;
+          animation: gradientTrad 3s ease infinite;
         }
-        
+
+        /* Gradient texte orange */
         .text-gradient-orange {
-          background: linear-gradient(135deg, #dc2626 0%, #ea580c 25%, #f59e0b 50%, #ea580c 75%, #dc2626 100%);
+          background: linear-gradient(135deg, #c46a00 0%, #e8820c 25%, #f5a030 50%, #e8820c 75%, #c46a00 100%);
           background-size: 300% auto;
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
-          animation: gradientShift 2s ease infinite;
+          animation: gradientTrad 2s ease infinite;
         }
-        
+
         /* Particules décoratives */
-        .particle {
+        .particle-trad {
           position: absolute;
           width: 4px;
           height: 4px;
-          background: linear-gradient(135deg, #dc2626, #ea580c);
+          background: linear-gradient(135deg, #3d7a35, #e8820c);
           border-radius: 50%;
           pointer-events: none;
-          animation: particleRotate 3s ease-in-out infinite;
+          animation: particleRotateTrad 3s ease-in-out infinite;
         }
-        
-        .particle:nth-child(1) { top: -10px; left: 20%; animation-delay: 0s; }
-        .particle:nth-child(2) { bottom: -10px; right: 20%; animation-delay: 0.5s; width: 6px; height: 6px; }
-        .particle:nth-child(3) { top: 30%; right: -15px; animation-delay: 1s; width: 3px; height: 3px; }
-        .particle:nth-child(4) { bottom: 30%; left: -15px; animation-delay: 1.5s; width: 5px; height: 5px; }
-        .particle:nth-child(5) { top: -5px; right: 40%; animation-delay: 0.8s; width: 4px; height: 4px; }
-        
-        /* Ripple effect */
-        .logo-box-modern::after {
+
+        .particle-trad:nth-child(1) { top: -8px; left: 20%; animation-delay: 0s; }
+        .particle-trad:nth-child(2) { bottom: -8px; right: 20%; animation-delay: 0.5s; width: 5px; height: 5px; }
+        .particle-trad:nth-child(3) { top: 30%; right: -12px; animation-delay: 1s; width: 3px; height: 3px; }
+        .particle-trad:nth-child(4) { bottom: 30%; left: -12px; animation-delay: 1.5s; width: 4px; height: 4px; }
+        .particle-trad:nth-child(5) { top: -4px; right: 40%; animation-delay: 0.8s; width: 3px; height: 3px; }
+
+        /* Ripple */
+        @keyframes rippleTrad {
+          0%   { box-shadow: 0 0 0 0 rgba(232, 130, 12, 0.5); opacity: 1; }
+          100% { box-shadow: 0 0 0 20px rgba(232, 130, 12, 0); opacity: 0; }
+        }
+
+        .logo-box-trad:active::after {
           content: '';
           position: absolute;
           inset: 0;
           border-radius: 20px;
+          animation: rippleTrad 0.6s ease-out;
           pointer-events: none;
         }
-        
-        .logo-box-modern:active::after {
-          animation: ripple 0.6s ease-out;
-        }
-        
-        @keyframes ripple {
-          0% {
-            box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.5);
-            opacity: 1;
-          }
-          100% {
-            box-shadow: 0 0 0 20px rgba(220, 38, 38, 0);
-            opacity: 0;
-          }
+
+        /* Motif zellige en overlay - version vert/orange */
+        .hero-zellige-overlay {
+          background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23e8820c' stroke-width='0.3' opacity='0.1'%3E%3Cpolygon points='40,4 76,19 76,61 40,76 4,61 4,19'/%3E%3Cpolygon points='40,16 60,28 60,52 40,64 20,52 20,28'/%3E%3Ccircle cx='40' cy='40' r='8'/%3E%3C/g%3E%3C/svg%3E");
+          background-size: 60px 60px;
+          pointer-events: none;
         }
       `}</style>
 
@@ -346,9 +270,7 @@ export default function Hero() {
                 alt=""
                 fill
                 className="object-cover"
-                style={{
-                  animation: `${getKenBurns(prev)} 6s ease forwards`,
-                }}
+                style={{ animation: `${getKenBurns(prev)} 6s ease forwards` }}
               />
             </div>
           )}
@@ -364,67 +286,83 @@ export default function Hero() {
             <Image
               key={`current-${current}`}
               src={IMAGES[current]}
-              alt={`Smoky Burgers slide ${current + 1}`}
+              alt={`Dghmira slide ${current + 1}`}
               fill
               priority={current === 0}
               className="object-cover"
-              style={{
-                animation: `${getKenBurns(current)} 6s ease forwards`,
-              }}
+              style={{ animation: `${getKenBurns(current)} 6s ease forwards` }}
             />
           </div>
 
-          {/* Overlay dégradé moderne */}
+          {/* Overlay — tons verts */}
           <div
             className="absolute inset-0"
             style={{
-              background: 'linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.2) 100%)',
+              background:
+                'linear-gradient(135deg, rgba(45,90,39,0.25) 0%, rgba(0,0,0,0.45) 50%, rgba(61,122,53,0.15) 100%)',
               zIndex: 3,
             }}
           />
+          
+          {/* Motif zellige décoratif */}
+          <div className="hero-zellige-overlay absolute inset-0 z-[4]" />
         </div>
 
-        {/* Contenu centré */}
-        <div className="relative flex flex-col items-center justify-center h-full gap-2 text-white px-4" style={{ zIndex: 10 }}>
+        {/* Contenu centré — style traditionnel sans brun */}
+        <div
+          className="relative flex flex-col items-center justify-center h-full gap-2 text-white px-4"
+          style={{ zIndex: 10 }}
+        >
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-[#e8820c]/60 text-xs tracking-[6px]">✻</span>
+            <span className="text-[#e8820c]/40 text-[10px] tracking-[4px]">BIENVENUE</span>
+            <span className="text-[#e8820c]/60 text-xs tracking-[6px]">✻</span>
+          </div>
           <h1
-            className="font-black text-3xl sm:text-4xl md:text-5xl tracking-wide drop-shadow-lg"
-            style={{ fontFamily: 'var(--font-bebas)', letterSpacing: '3px' }}
+            className="font-black text-3xl sm:text-4xl md:text-5xl tracking-[6px] drop-shadow-lg italic"
+            style={{ fontFamily: '"Times New Roman", Times, serif', letterSpacing: '6px' }}
           >
-            Smoky Burgers
+            D<span style={{ color: '#f5a030' }}>g</span>hmira
           </h1>
-          <div className="flex items-center gap-1.5 bg-green-600 text-white text-sm font-bold px-3 py-1 rounded-md shadow">
-            <Star size={13} fill="white" />
-            <span>4.8</span>
-          </div>
-          <div className="flex items-center gap-1.5 mt-1">
-            <MapPin size={14} className="text-red-400 shrink-0" />
-            <span className="text-white/90 text-sm sm:text-base font-medium drop-shadow">
-              Av. Tantan, Casablanca
-            </span>
+          <div className="flex items-center gap-2 mt-2">
+            <div className="flex items-center gap-1 px-3 py-1 rounded-sm"
+              style={{ background: '#3d7a35', border: '1px solid #e8820c' }}>
+              <Star size={13} fill="#f5a030" stroke="#f5a030" />
+              <span className="text-white text-sm font-bold tracking-wide">4.8</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-3 py-1">
+              <MapPin size={14} className="shrink-0" style={{ color: '#f5a030' }} />
+              <span className="text-white/90 text-sm sm:text-base font-medium drop-shadow tracking-wide">
+                Casablanca, Maroc
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Logo avec animations ultra modernes */}
+        {/* Logo box traditionnel - version verte */}
         <div className="absolute bottom-0 left-10 sm:left-16 translate-y-1/2" style={{ zIndex: 20 }}>
-          <div className="logo-box-modern bg-white/95 rounded-2xl shadow-2xl w-[115px] h-[125px] sm:w-[135px] sm:h-[150px] flex flex-col items-center justify-center gap-0.5 px-3 py-4">
-            {/* Particules décoratives */}
-            <div className="particle"></div>
-            <div className="particle"></div>
-            <div className="particle"></div>
-            <div className="particle"></div>
-            <div className="particle"></div>
-            
-            <div className="relative w-16 h-16 sm:w-20 sm:h-20 logo-image-modern transition-all duration-300">
-              <Image src="/smoky.PNG" alt="Logo Smoky Burgers" fill className="object-contain" />
+          <div className="logo-box-trad rounded-2xl shadow-2xl w-[115px] h-[125px] sm:w-[135px] sm:h-[150px] flex flex-col items-center justify-center gap-0.5 px-3 py-4">
+            <div className="particle-trad"></div>
+            <div className="particle-trad"></div>
+            <div className="particle-trad"></div>
+            <div className="particle-trad"></div>
+            <div className="particle-trad"></div>
+
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20 logo-image-trad">
+              <Image src="/dghmira-.png" alt="Logo Dghmira" fill className="object-contain" />
             </div>
-            <span className="text-gradient-modern font-black text-xs sm:text-sm tracking-[1.5px] uppercase leading-none" style={{ fontFamily: 'var(--font-bebas)' }}>
-              Smoky
+            <span
+              className="text-gradient-green font-black text-xs sm:text-sm tracking-[3px] uppercase leading-none"
+              style={{ fontFamily: '"Times New Roman", Times, serif' }}
+            >
+              D<span className="text-gradient-orange">g</span>hmira
             </span>
-            <span className="text-gradient-orange font-black text-xs sm:text-sm tracking-[1.5px] uppercase leading-none -mt-0.5" style={{ fontFamily: 'var(--font-bebas)' }}>
-              Burgers
-            </span>
-            <span className="text-gray-400 text-[7px] tracking-[1.5px] uppercase mt-0.5 transition-all duration-300 group-hover:text-gray-600" style={{ fontFamily: 'var(--font-outfit)' }}>
-              Fast Food
+            <div className="w-8 h-px bg-gradient-to-r from-transparent via-[#e8820c]/40 to-transparent my-0.5" />
+            <span
+              className="text-gray-400 text-[7px] tracking-[3px] uppercase mt-0.5"
+              style={{ fontFamily: '"Times New Roman", Times, serif' }}
+            >
+              Restaurant
             </span>
           </div>
         </div>

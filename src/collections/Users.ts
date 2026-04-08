@@ -11,3 +11,4 @@ export const Users: CollectionConfig = {
     // Add more fields as needed
   ],
 }
+

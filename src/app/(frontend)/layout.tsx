@@ -18,14 +18,13 @@ const jost = Jost({
   variable: '--font-jost'
 })
 
-// Métadonnées avec smoky.PNG comme logo
 export const metadata: Metadata = {
-  title: 'Smoky Burgers',
+  title: 'Dghmira',
   description: 'Le meilleur burger à Casablanca - Burgers artisanaux préparés avec des ingrédients frais',
   icons: {
-    icon: '/smoky.PNG',
-    shortcut: '/smoky.PNG',
-    apple: '/smoky.PNG',
+    icon: '/dghmira-.png',
+    shortcut: '/dghmira-.png',
+    apple: '/dghmira-.png',
   },
 }
 
@@ -33,8 +32,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="fr">
       <head>
-        <link rel="icon" href="/smoky.PNG" type="image/png" />
-        <link rel="apple-touch-icon" href="/smoky.PNG" />
+        <link rel="icon" href="/dghmira-.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/dghmira-.png" />
         <meta name="theme-color" content="#dc2626" />
       </head>
       <body className={`${cormorant.variable} ${jost.variable}`}>
