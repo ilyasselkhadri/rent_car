@@ -69,7 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    menu: Menu;
+    cars: Car;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -79,7 +79,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    menu: MenuSelect<false> | MenuSelect<true>;
+    cars: CarsSelect<false> | CarsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -190,64 +190,81 @@ export interface Media {
   };
 }
 /**
- * Gérez les plats du restaurant Dghmira
+ * Gérez le parc de véhicules
  *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "menu".
+ * via the `definition` "cars".
  */
-export interface Menu {
+export interface Car {
   id: number;
   nom: string;
-  categorie:
-    | 'promotions'
-    | 'top_ventes'
-    | 'entrees'
-    | 'formules'
-    | 'sandwicherie'
-    | 'pastillas'
-    | 'sandwichs_tajines'
-    | 'tajines_viande'
-    | 'tajines_poulet'
-    | 'boissons';
+  brand:
+    | 'dacia'
+    | 'renault'
+    | 'peugeot'
+    | 'citroen'
+    | 'volkswagen'
+    | 'toyota'
+    | 'hyundai'
+    | 'kia'
+    | 'ford'
+    | 'bmw'
+    | 'mercedes'
+    | 'audi'
+    | 'seat'
+    | 'skoda'
+    | 'fiat'
+    | 'autre';
+  type: 'citadine' | 'berline' | 'suv' | '4x4' | 'break' | 'monospace' | 'utilitaire' | 'cabriolet' | 'coupe';
+  transmission: 'manuelle' | 'automatique';
+  carburant: 'essence' | 'diesel' | 'hybride' | 'electrique' | 'gpl';
+  couleur?: string | null;
+  immatriculation?: string | null;
   prix: number;
+  prixSemaine?: number | null;
+  prixMois?: number | null;
+  details?: {
+    annee?: number | null;
+    kilometrage?: number | null;
+    places?: number | null;
+    portes?: number | null;
+    climatisation?: boolean | null;
+    gps?: boolean | null;
+    bluetooth?: boolean | null;
+    camera?: boolean | null;
+  };
+  description?: string | null;
   /**
-   * Laissez vide si pas de promotion
+   * Upload l'image principale du véhicule
    */
-  prixPromotion?: number | null;
-  description: string;
+  imageprincipale: number | Media;
   /**
-   * Upload l'image principale du plat
-   */
-  image: number | Media;
-  /**
-   * Photos supplémentaires du plat (optionnel)
+   * Ajoutez plusieurs photos (4, 5, 10 ou plus selon vos besoins)
    */
   galerie?:
     | {
         image: number | Media;
+        /**
+         * Ex: Vue avant, Intérieur, Coffre, Moteur...
+         */
         legende?: string | null;
         id?: string | null;
       }[]
     | null;
-  /**
-   * Ex: suppléments, pains, sauces, etc.
-   */
-  options?:
-    | {
-        nomOption: string;
-        prixOption?: number | null;
-        id?: string | null;
-      }[]
-    | null;
   disponible?: boolean | null;
-  /**
-   * 0 à 5 étoiles
-   */
-  popularite?: number | null;
   featured?: boolean | null;
   ordre?: number | null;
   updatedAt: string;
   createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -282,8 +299,8 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
-        relationTo: 'menu';
-        value: number | Menu;
+        relationTo: 'cars';
+        value: number | Car;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -403,15 +420,33 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "menu_select".
+ * via the `definition` "cars_select".
  */
-export interface MenuSelect<T extends boolean = true> {
+export interface CarsSelect<T extends boolean = true> {
   nom?: T;
-  categorie?: T;
+  brand?: T;
+  type?: T;
+  transmission?: T;
+  carburant?: T;
+  couleur?: T;
+  immatriculation?: T;
   prix?: T;
-  prixPromotion?: T;
+  prixSemaine?: T;
+  prixMois?: T;
+  details?:
+    | T
+    | {
+        annee?: T;
+        kilometrage?: T;
+        places?: T;
+        portes?: T;
+        climatisation?: T;
+        gps?: T;
+        bluetooth?: T;
+        camera?: T;
+      };
   description?: T;
-  image?: T;
+  imageprincipale?: T;
   galerie?:
     | T
     | {
@@ -419,19 +454,20 @@ export interface MenuSelect<T extends boolean = true> {
         legende?: T;
         id?: T;
       };
-  options?:
-    | T
-    | {
-        nomOption?: T;
-        prixOption?: T;
-        id?: T;
-      };
   disponible?: T;
-  popularite?: T;
   featured?: T;
   ordre?: T;
   updatedAt?: T;
   createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

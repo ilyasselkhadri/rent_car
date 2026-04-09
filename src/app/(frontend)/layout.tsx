@@ -19,12 +19,12 @@ const jost = Jost({
 })
 
 export const metadata: Metadata = {
-  title: 'Dghmira',
-  description: 'Le meilleur burger à Casablanca - Burgers artisanaux préparés avec des ingrédients frais',
+  title: 'rent_car_marrakech',
+  description: 'Le meilleur choix pour louer une voiture à Marrakech. Découvrez notre large sélection de véhicules, des berlines élégantes aux SUV spacieux, tous disponibles à des prix compétitifs. Réservez dès maintenant et profitez de votre séjour à Marrakech avec style et confort.',
   icons: {
-    icon: '/dghmira-.png',
-    shortcut: '/dghmira-.png',
-    apple: '/dghmira-.png',
+    icon: '/rentalcar.png',
+    shortcut: '/rentalcar.png',
+    apple: '/rentalcar.png',
   },
 }
 
@@ -32,8 +32,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="fr">
       <head>
-        <link rel="icon" href="/dghmira-.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/dghmira-.png" />
+        <link rel="icon" href="/rentalcar.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/rentalcar.png" />
         <meta name="theme-color" content="#dc2626" />
       </head>
       <body className={`${cormorant.variable} ${jost.variable}`}>

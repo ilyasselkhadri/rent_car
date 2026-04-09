@@ -1,32 +1,30 @@
 'use client'
 
 import { useEffect, useRef, useState, useCallback } from 'react'
-import Image from 'next/image'
-import { Flame, Clock, Truck, Award, MapPin, Phone } from 'lucide-react'
 
-// ─── Image sets per section ────────────────
+// ─── Image sets per section - 5 images each ────────────────────────────────
 const missionImages = [
-  { src: '/img2.jpeg', alt: 'Tajine traditionnel marocain' },
-  { src: '/img7.jpeg', alt: 'Couscous royal' },
-  { src: '/img12.jpeg', alt: 'Pastilla marocaine' },
-  { src: '/img13.jpeg', alt: 'Mechoui traditionnel' },
-  { src: '/img15.jpeg', alt: 'Thé à la menthe et pâtisseries' },
+  { src: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&h=600&fit=crop', alt: 'Flotte moderne de voitures à Marrakech' },
+  { src: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&h=600&fit=crop', alt: 'Voiture de luxe Mercedes' },
+  { src: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&h=600&fit=crop', alt: 'Voiture sportive BMW' },
+  { src: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&h=600&fit=crop', alt: 'Audi Q5 neuve' },
+  { src: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=800&h=600&fit=crop', alt: 'Intérieur luxueux voiture' },
 ]
 
 const storyImages = [
-  { src: '/img1.jpeg', alt: 'Cuisine marocaine authentique' },
-  { src: '/img11.jpeg', alt: 'Préparation artisanale' },
-  { src: '/img5.jpeg', alt: 'Épices marocaines' },
-  { src: '/img4.jpeg', alt: 'Chef au travail' },
-  { src: '/img9.jpeg', alt: 'Atmosphère chaleureuse' },
+  { src: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=800&h=600&fit=crop', alt: 'Accueil client personnalisé' },
+  { src: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=800&h=600&fit=crop', alt: 'Marrakech ville moderne' },
+  { src: 'https://images.unsplash.com/photo-1590362891991-f776e747a588?w=800&h=600&fit=crop', alt: 'Équipe professionnelle' },
+  { src: 'https://images.unsplash.com/photo-1559521783-1d1599583485?w=800&h=600&fit=crop', alt: 'Service client de qualité' },
+  { src: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop', alt: 'Remise des clés satisfaite' },
 ]
 
 const whyImages = [
-  { src: '/img3.jpeg', alt: 'Produits locaux marocains' },
-  { src: '/img14.jpeg', alt: 'Viande halal qualité supérieure' },
-  { src: '/img8.jpeg', alt: 'Pain artisanal fait maison' },
-  { src: '/img6.jpeg', alt: 'Recettes traditionnelles' },
-  { src: '/img10.jpeg', alt: 'Épices authentiques' },
+  { src: 'https://greenwichfirst.com/wp-content/uploads/2023/04/man-in-the-drivers-seat-of-his-new-car.jpg', alt: 'Voiture de luxe haut de gamme' },
+  { src: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&h=600&fit=crop', alt: 'Véhicule premium sur la route' },
+  { src: 'https://images.unsplash.com/photo-1485291571150-772bcfc10da5?w=800&h=600&fit=crop', alt: 'Road trip au Maroc' },
+  { src: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&h=600&fit=crop', alt: 'Voiture moderne Marrakech' },
+  { src: 'https://images.unsplash.com/photo-1550355291-bbee04a92027?w=800&h=600&fit=crop', alt: 'Voiture sportive sur route' },
 ]
 
 // ─── Auto-rotating image carousel ─────────────────────────
@@ -58,30 +56,26 @@ function ImageCarousel({ images, interval = 5000 }: { images: { src: string; alt
   }, [images.length, interval])
 
   return (
-    <div className="relative rounded-2xl overflow-hidden shadow-2xl group" style={{ aspectRatio: '1/1' }}>
+    <div className="relative rounded-2xl overflow-hidden shadow-2xl group" style={{ aspectRatio: '4/3' }}>
       {images.map((img, idx) => (
-        <div
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
           key={img.src}
-          className="absolute inset-0 w-full h-full"
+          src={img.src}
+          alt={img.alt}
+          className="absolute inset-0 w-full h-full object-cover"
           style={{
             opacity: idx === current ? 1 : 0,
             transform: idx === current ? 'scale(1.04)' : 'scale(1)',
             transition: idx === current ? 'opacity 0.7s ease, transform 6s ease' : 'opacity 0.7s ease',
             zIndex: idx === current ? 2 : idx === prev ? 1 : 0,
           }}
-        >
-          <Image
-            src={img.src}
-            alt={img.alt}
-            fill
-            className="object-cover"
-          />
-        </div>
+        />
       ))}
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10 pointer-events-none" />
-      {/* Orange border */}
-      <div className="absolute inset-0 rounded-2xl z-20 pointer-events-none" style={{ boxShadow: 'inset 0 0 0 1px rgba(232,130,12,0.35)' }} />
+      {/* Gold border */}
+      <div className="absolute inset-0 rounded-2xl z-20 pointer-events-none" style={{ boxShadow: 'inset 0 0 0 1px rgba(196,163,90,0.35)' }} />
       {/* Dots */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-30">
         {images.map((_, idx) => (
@@ -92,7 +86,7 @@ function ImageCarousel({ images, interval = 5000 }: { images: { src: string; alt
             style={{
               width: idx === current ? '24px' : '8px',
               height: '8px',
-              background: idx === current ? '#e8820c' : 'rgba(255,255,255,0.5)',
+              background: idx === current ? '#c4a35a' : 'rgba(255,255,255,0.5)',
             }}
           />
         ))}
@@ -110,66 +104,44 @@ function CheckItem({ text }: { text: string }) {
   return (
     <div className="flex items-start gap-4 group">
       <div className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5 transition-all duration-300 group-hover:scale-110"
-        style={{ background: 'linear-gradient(135deg, #3d7a35, #e8820c)' }}>
+        style={{ background: 'linear-gradient(135deg, #c4a35a, #e6c97a)' }}>
         <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
           <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
-      <span className="text-gray-600 leading-relaxed group-hover:text-gray-900 transition-colors duration-200" dangerouslySetInnerHTML={{ __html: text }} />
+      <span className="text-gray-600 leading-relaxed group-hover:text-gray-900 transition-colors duration-200">{text}</span>
     </div>
   )
 }
 
 // ─── Main ──────────────────────────────────────────────────
 export default function AboutSection() {
-  const avantagesItems = [
-    "100% fait maison avec des recettes traditionnelles",
-    "Épices authentiques venues des souks marocains",
-    "Pains et pâtisseries préparés chaque matin",
-    "Viande halal de première qualité",
-    "Plats cuisinés avec amour comme à la maison",
-    "Livraison rapide partout à Casablanca",
-    "Ouvert 7j/7 de 12h à 23h",
-  ]
-
   return (
     <section
       id="about"
       className="relative py-24 overflow-hidden"
       style={{ background: 'linear-gradient(160deg, #fdfaf5 0%, #f8f4ed 40%, #fdfcf9 100%)' }}
     >
-      {/* Decorative blobs - vert/orange */}
+      {/* Decorative blobs */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(61,122,53,0.06) 0%, transparent 70%)', transform: 'translate(30%, -30%)' }} />
+        style={{ background: 'radial-gradient(circle, rgba(196,163,90,0.06) 0%, transparent 70%)', transform: 'translate(30%, -30%)' }} />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(232,130,12,0.04) 0%, transparent 70%)', transform: 'translate(-30%, 30%)' }} />
-
-      {/* Motif zellige décoratif */}
-      <div className="absolute inset-0 pointer-events-none opacity-5"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%233d7a35' stroke-width='0.5'%3E%3Cpolygon points='30,3 57,16.5 57,43.5 30,57 3,43.5 3,16.5'/%3E%3Cpolygon points='30,12 48,21 48,39 30,48 12,39 12,21'/%3E%3Ccircle cx='30' cy='30' r='6'/%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundRepeat: 'repeat',
-          backgroundSize: '60px 60px',
-        }}
-      />
+        style={{ background: 'radial-gradient(circle, rgba(196,163,90,0.04) 0%, transparent 70%)', transform: 'translate(-30%, 30%)' }} />
 
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
 
         {/* ── Header ── */}
         <div className="text-center mb-16">
-          <div className="flex justify-center items-center gap-3 mb-4">
-            <span className="text-[#e8820c] text-xl">✻</span>
-            <span className="text-xs font-bold tracking-[0.3em] uppercase text-gray-400">L'Âme du Maroc</span>
-            <span className="text-[#e8820c] text-xl">✻</span>
+          <div className="flex items-center justify-center gap-3 mb-4">
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3"
-            style={{ fontFamily: '"Times New Roman", Times, serif', letterSpacing: '2px' }}>
-            <span className="border-b-2 border-[#e8820c] pb-2">À propos de Dghmira</span>
+            style={{ fontFamily: 'Georgia, serif', letterSpacing: '-0.01em' }}>
+            <span className="border-b-2 border-[#c4a35a] pb-1">À propos de nous</span>
           </h2>
           <div className="flex justify-center gap-2 mt-4">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#3d7a35]" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#e8820c]" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#3d7a35]" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#c4a35a]" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#c4a35a]" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#c4a35a]" />
           </div>
         </div>
 
@@ -177,16 +149,16 @@ export default function AboutSection() {
         <div className="grid md:grid-cols-2 gap-16 items-center mb-24">
           <div className="order-2 md:order-1">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-0.5" style={{ background: '#e8820c' }} />
+              <div className="w-8 h-0.5" style={{ background: '#c4a35a' }} />
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-gray-400">Notre mission</span>
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
-              L'âme du Maroc <span style={{ color: '#e8820c' }}>à chaque bouchée</span>
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
+              Votre partenaire <span style={{ color: '#c4a35a' }}>mobilité</span> à Marrakech
             </h3>
             <div className="space-y-4 text-gray-600 leading-relaxed">
-              <p>Chez <strong className="text-[#3d7a35]">Dghmira</strong>, notre mission est simple : vous offrir <strong className="text-gray-800">le meilleur de la cuisine marocaine traditionnelle</strong>, préparée avec passion et des ingrédients locaux de première qualité.</p>
-              <p>Nous croyons que la vraie cuisine marocaine se fait avec des produits frais, des épices authentiques et beaucoup d'amour. C'est pourquoi nous utilisons <strong className="text-gray-800">100% d'ingrédients locaux</strong> et préparons tout sur place comme à la maison.</p>
-              <p>Notre engagement : vous faire voyager au cœur du Maroc à travers des plats généreux, savoureux et authentiques, dans une ambiance chaleureuse et traditionnelle.</p>
+              <p>Chez <strong className="text-gray-800">Imperial-Car Rental</strong>, notre mission est simple : rendre la location de voiture à Marrakech <strong className="text-gray-800">rapide, transparente et accessible</strong> à tous.</p>
+              <p>Que vous soyez résident, voyageur d&apos;affaires ou touriste, nous mettons à votre disposition une flotte moderne et un service client réactif, disponible <strong className="text-gray-800">de 9h à 23h</strong>.</p>
+              <p>Nous comprenons que la mobilité au Maroc est essentielle. C&apos;est pourquoi nous avons bâti un service fiable, flexible et sans stress, avec une présence privilégiée dans le quartier de <strong className="text-gray-800">l&apos;Hivernage</strong>.</p>
             </div>
           </div>
           <div className="order-1 md:order-2">
@@ -201,21 +173,18 @@ export default function AboutSection() {
           </div>
           <div className="order-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-0.5" style={{ background: '#e8820c' }} />
+              <div className="w-8 h-0.5" style={{ background: '#c4a35a' }} />
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-gray-400">Notre histoire</span>
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
-              Nés d'une <span style={{ color: '#e8820c' }}>passion</span> pour la tradition
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
+              Nés d&apos;un besoin <span style={{ color: '#c4a35a' }}>réel</span>
             </h3>
-            <p className="text-gray-600 leading-relaxed mb-4">Dghmira est né d'une passion : celle de la cuisine marocaine authentique et du goût d'antan. Après des années à chercher les saveurs de notre enfance, nous avons décidé de les recréer pour vous.</p>
-            <p className="text-gray-600 leading-relaxed mb-6">Notre promesse :</p>
+            <p className="text-gray-600 leading-relaxed mb-4">Imperial-Car Rental est né d&apos;un constat simple : la location de voiture à Marrakech est souvent compliquée, peu claire et manquant de transparence.</p>
+            <p className="text-gray-600 leading-relaxed mb-6">Notre objectif était de construire une agence différente :</p>
             <div className="space-y-3 mb-6">
-              <CheckItem text="Plats 100% faits maison" />
-              <CheckItem text="Recettes traditionnelles marocaines" />
-              <CheckItem text="Épices authentiques des souks" />
-              <CheckItem text="100% d'ingrédients locaux" />
-              <CheckItem text="Commandez sur Glovo & Jumia Food" />
-              <CheckItem text="Livraison gratuite à Casablanca" />
+              <CheckItem text="Des tarifs clairs et sans surprises" />
+              <CheckItem text="Une réservation rapide et intuitive via WhatsApp" />
+              <CheckItem text="Un support humain, chaleureux et disponible 9h-23h" />
             </div>
           </div>
         </div>
@@ -224,33 +193,41 @@ export default function AboutSection() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-0.5" style={{ background: '#e8820c' }} />
+              <div className="w-8 h-0.5" style={{ background: '#c4a35a' }} />
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-gray-400">Nos avantages</span>
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 leading-tight" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
-              Pourquoi choisir <span style={{ color: '#e8820c' }}>Dghmira ?</span>
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
+              Pourquoi choisir <span style={{ color: '#c4a35a' }}>Imperial-Car Rental ?</span>
             </h3>
             <div className="space-y-4">
-              {avantagesItems.map((item, idx) => (
+              {[
+                "Réservation rapide via WhatsApp : +212665171827",
+                "Assurance tous risques incluse",
+                "Service client disponible 9h à 23h",
+                "Accueil professionnel et personnalisé",
+                "Livraison à l'aéroport, hôtel ou domicile",
+                "Agence située dans le quartier de l'Hivernage",
+              ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-4 group">
                   <div className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                    style={{ background: 'linear-gradient(135deg, #3d7a35, #e8820c)' }}>
+                    style={{ background: 'linear-gradient(135deg, #c4a35a, #e6c97a)' }}>
                     <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
                       <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  <span className="text-gray-600 group-hover:text-gray-900 transition-colors duration-200" dangerouslySetInnerHTML={{ __html: item.replace(/'/g, "&apos;") }} />
+                  <span className="text-gray-600 group-hover:text-gray-900 transition-colors duration-200">{item}</span>
                 </div>
               ))}
             </div>
             <div className="mt-8 pt-6 border-t border-gray-200">
-              <p className="text-gray-500 text-sm leading-relaxed">Notre objectif est simple : vous offrir l'expérience culinaire marocaine la plus authentique et savoureuse de Casablanca, à chaque visite. Rejoignez les milliers de clients satisfaits qui font de Dghmira leur restaurant préféré !</p>
+              <p className="text-gray-500 text-sm leading-relaxed">Notre objectif est simple : vous offrir la meilleure expérience de location possible, à chaque trajet, à Marrakech.</p>
             </div>
           </div>
           <div className="order-1 md:order-2">
             <ImageCarousel images={whyImages} interval={5000} />
           </div>
         </div>
+
       </div>
     </section>
   )

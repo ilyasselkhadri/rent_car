@@ -8,7 +8,7 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-import { Menu } from './collections/Menu'
+import { Cars } from './collections/Cars'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,7 +20,11 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Menu],
+  collections: [
+    Users,
+    Media,
+    Cars,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -35,17 +39,18 @@ export default buildConfig({
   plugins: [
     s3Storage({
       collections: {
-        media: true, // active pour la collection "media"
+        media: true,      // Pour la collection media
+        cars: true,       // Pour la collection cars (upload direct)
       },
       bucket: process.env.SUPABASE_BUCKET_NAME || 'dghmira-media',
       config: {
-        endpoint: process.env.SUPABASE_S3_ENDPOINT, // URL S3 de Supabase
+        endpoint: process.env.SUPABASE_S3_ENDPOINT,
         credentials: {
           accessKeyId: process.env.SUPABASE_S3_ACCESS_KEY_ID || '',
           secretAccessKey: process.env.SUPABASE_S3_SECRET_ACCESS_KEY || '',
         },
         region: process.env.SUPABASE_S3_REGION || 'eu-central-1',
-        forcePathStyle: true, // OBLIGATOIRE pour Supabase
+        forcePathStyle: true,
       },
     }),
   ],
