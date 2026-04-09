@@ -42,7 +42,7 @@ export default buildConfig({
         media: true,      // Pour la collection media
         cars: true,       // Pour la collection cars (upload direct)
       },
-      bucket: process.env.SUPABASE_BUCKET_NAME || 'dghmira-media',
+      bucket: process.env.SUPABASE_BUCKET_NAME || 'car',
       config: {
         endpoint: process.env.SUPABASE_S3_ENDPOINT,
         credentials: {
