@@ -203,19 +203,74 @@ export interface Car {
     | 'renault'
     | 'peugeot'
     | 'citroen'
+    | 'ds'
+    | 'bugatti'
     | 'volkswagen'
-    | 'toyota'
-    | 'hyundai'
-    | 'kia'
-    | 'ford'
     | 'bmw'
     | 'mercedes'
     | 'audi'
-    | 'seat'
-    | 'skoda'
+    | 'porsche'
+    | 'opel'
+    | 'smart'
+    | 'landrover'
+    | 'rangerover'
+    | 'jaguar'
+    | 'bentley'
+    | 'rollsroyce'
+    | 'mini'
+    | 'lotus'
+    | 'astonmartin'
+    | 'mclaren'
+    | 'toyota'
+    | 'honda'
+    | 'nissan'
+    | 'mazda'
+    | 'mitsubishi'
+    | 'subaru'
+    | 'suzuki'
+    | 'lexus'
+    | 'infiniti'
+    | 'hyundai'
+    | 'kia'
+    | 'genesis'
+    | 'ford'
+    | 'chevrolet'
+    | 'tesla'
+    | 'jeep'
+    | 'dodge'
+    | 'cadillac'
+    | 'lincoln'
+    | 'gmc'
+    | 'rivian'
     | 'fiat'
+    | 'ferrari'
+    | 'lamborghini'
+    | 'maserati'
+    | 'alfaromeo'
+    | 'lancia'
+    | 'seat'
+    | 'cupra'
+    | 'skoda'
+    | 'volvo'
+    | 'polestar'
+    | 'byd'
+    | 'mg'
+    | 'greatwall'
+    | 'nio'
+    | 'xpeng'
     | 'autre';
-  type: 'citadine' | 'berline' | 'suv' | '4x4' | 'break' | 'monospace' | 'utilitaire' | 'cabriolet' | 'coupe';
+  type:
+    | 'citadine'
+    | 'berline'
+    | 'suv'
+    | '4x4'
+    | 'break'
+    | 'monospace'
+    | 'utilitaire'
+    | 'cabriolet'
+    | 'coupe'
+    | 'sportive'
+    | 'luxe';
   transmission: 'manuelle' | 'automatique';
   carburant: 'essence' | 'diesel' | 'hybride' | 'electrique' | 'gpl';
   couleur?: string | null;
@@ -232,6 +287,8 @@ export interface Car {
     gps?: boolean | null;
     bluetooth?: boolean | null;
     camera?: boolean | null;
+    toitOuvrant?: boolean | null;
+    siegesChauffants?: boolean | null;
   };
   description?: string | null;
   /**
@@ -444,6 +501,8 @@ export interface CarsSelect<T extends boolean = true> {
         gps?: T;
         bluetooth?: T;
         camera?: T;
+        toitOuvrant?: T;
+        siegesChauffants?: T;
       };
   description?: T;
   imageprincipale?: T;

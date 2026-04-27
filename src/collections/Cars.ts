@@ -27,22 +27,89 @@ export const Cars: CollectionConfig = {
       label: 'Marque',
       required: true,
       options: [
-        { label: 'Dacia',      value: 'dacia' },
-        { label: 'Renault',    value: 'renault' },
-        { label: 'Peugeot',    value: 'peugeot' },
-        { label: 'Citroën',    value: 'citroen' },
+        // Françaises
+        { label: 'Dacia', value: 'dacia' },
+        { label: 'Renault', value: 'renault' },
+        { label: 'Peugeot', value: 'peugeot' },
+        { label: 'Citroën', value: 'citroen' },
+        { label: 'DS Automobiles', value: 'ds' },
+        { label: 'Bugatti', value: 'bugatti' },
+        
+        // Allemandes
         { label: 'Volkswagen', value: 'volkswagen' },
-        { label: 'Toyota',     value: 'toyota' },
-        { label: 'Hyundai',    value: 'hyundai' },
-        { label: 'Kia',        value: 'kia' },
-        { label: 'Ford',       value: 'ford' },
-        { label: 'BMW',        value: 'bmw' },
-        { label: 'Mercedes',   value: 'mercedes' },
-        { label: 'Audi',       value: 'audi' },
-        { label: 'Seat',       value: 'seat' },
-        { label: 'Skoda',      value: 'skoda' },
-        { label: 'Fiat',       value: 'fiat' },
-        { label: 'Autre',      value: 'autre' },
+        { label: 'BMW', value: 'bmw' },
+        { label: 'Mercedes-Benz', value: 'mercedes' },
+        { label: 'Audi', value: 'audi' },
+        { label: 'Porsche', value: 'porsche' },
+        { label: 'Opel', value: 'opel' },
+        { label: 'Smart', value: 'smart' },
+        
+        // Britanniques
+        { label: 'Land Rover', value: 'landrover' },
+        { label: 'Range Rover', value: 'rangerover' },
+        { label: 'Jaguar', value: 'jaguar' },
+        { label: 'Bentley', value: 'bentley' },
+        { label: 'Rolls-Royce', value: 'rollsroyce' },
+        { label: 'Mini', value: 'mini' },
+        { label: 'Lotus', value: 'lotus' },
+        { label: 'Aston Martin', value: 'astonmartin' },
+        { label: 'McLaren', value: 'mclaren' },
+        
+        // Japonaises
+        { label: 'Toyota', value: 'toyota' },
+        { label: 'Honda', value: 'honda' },
+        { label: 'Nissan', value: 'nissan' },
+        { label: 'Mazda', value: 'mazda' },
+        { label: 'Mitsubishi', value: 'mitsubishi' },
+        { label: 'Subaru', value: 'subaru' },
+        { label: 'Suzuki', value: 'suzuki' },
+        { label: 'Lexus', value: 'lexus' },
+        { label: 'Infiniti', value: 'infiniti' },
+        
+        // Coréennes
+        { label: 'Hyundai', value: 'hyundai' },
+        { label: 'Kia', value: 'kia' },
+        { label: 'Genesis', value: 'genesis' },
+        
+        // Américaines
+        { label: 'Ford', value: 'ford' },
+        { label: 'Chevrolet', value: 'chevrolet' },
+        { label: 'Tesla', value: 'tesla' },
+        { label: 'Jeep', value: 'jeep' },
+        { label: 'Dodge', value: 'dodge' },
+        { label: 'Cadillac', value: 'cadillac' },
+        { label: 'Lincoln', value: 'lincoln' },
+        { label: 'GMC', value: 'gmc' },
+        { label: 'Rivian', value: 'rivian' },
+        
+        // Italiennes
+        { label: 'Fiat', value: 'fiat' },
+        { label: 'Ferrari', value: 'ferrari' },
+        { label: 'Lamborghini', value: 'lamborghini' },
+        { label: 'Maserati', value: 'maserati' },
+        { label: 'Alfa Romeo', value: 'alfaromeo' },
+        { label: 'Lancia', value: 'lancia' },
+        
+        // Espagnoles
+        { label: 'Seat', value: 'seat' },
+        { label: 'Cupra', value: 'cupra' },
+        
+        // Tchèques
+        { label: 'Skoda', value: 'skoda' },
+        
+        // Suédoises
+        { label: 'Volvo', value: 'volvo' },
+        { label: 'Polestar', value: 'polestar' },
+        
+        // Chinoises
+        { label: 'BYD', value: 'byd' },
+        { label: 'MG', value: 'mg' },
+        { label: 'Great Wall', value: 'greatwall' },
+        { label: 'Nio', value: 'nio' },
+        { label: 'Xpeng', value: 'xpeng' },
+        
+        // Autres
+        { label: 'Autre', value: 'autre' },
       ],
     },
     {
@@ -51,15 +118,17 @@ export const Cars: CollectionConfig = {
       label: 'Type de véhicule',
       required: true,
       options: [
-        { label: 'Citadine',   value: 'citadine' },
-        { label: 'Berline',    value: 'berline' },
-        { label: 'SUV',        value: 'suv' },
-        { label: '4x4',        value: '4x4' },
-        { label: 'Break',      value: 'break' },
-        { label: 'Monospace',  value: 'monospace' },
+        { label: 'Citadine', value: 'citadine' },
+        { label: 'Berline', value: 'berline' },
+        { label: 'SUV', value: 'suv' },
+        { label: '4x4', value: '4x4' },
+        { label: 'Break', value: 'break' },
+        { label: 'Monospace', value: 'monospace' },
         { label: 'Utilitaire', value: 'utilitaire' },
-        { label: 'Cabriolet',  value: 'cabriolet' },
-        { label: 'Coupé',      value: 'coupe' },
+        { label: 'Cabriolet', value: 'cabriolet' },
+        { label: 'Coupé', value: 'coupe' },
+        { label: 'Sportive', value: 'sportive' },
+        { label: 'Luxe', value: 'luxe' },
       ],
     },
     {
@@ -68,7 +137,7 @@ export const Cars: CollectionConfig = {
       label: 'Transmission',
       required: true,
       options: [
-        { label: 'Manuelle',    value: 'manuelle' },
+        { label: 'Manuelle', value: 'manuelle' },
         { label: 'Automatique', value: 'automatique' },
       ],
     },
@@ -78,11 +147,11 @@ export const Cars: CollectionConfig = {
       label: 'Carburant',
       required: true,
       options: [
-        { label: 'Essence',    value: 'essence' },
-        { label: 'Diesel',     value: 'diesel' },
-        { label: 'Hybride',    value: 'hybride' },
+        { label: 'Essence', value: 'essence' },
+        { label: 'Diesel', value: 'diesel' },
+        { label: 'Hybride', value: 'hybride' },
         { label: 'Électrique', value: 'electrique' },
-        { label: 'GPL',        value: 'gpl' },
+        { label: 'GPL', value: 'gpl' },
       ],
     },
     {
@@ -123,14 +192,16 @@ export const Cars: CollectionConfig = {
       type: 'group',
       label: 'Détails techniques',
       fields: [
-        { name: 'annee',         type: 'number',   label: 'Année',            min: 2000, max: 2030 },
-        { name: 'kilometrage',   type: 'number',   label: 'Kilométrage',      min: 0 },
-        { name: 'places',        type: 'number',   label: 'Nombre de places', min: 2, max: 9, defaultValue: 5 },
-        { name: 'portes',        type: 'number',   label: 'Nombre de portes', min: 2, max: 5, defaultValue: 4 },
-        { name: 'climatisation', type: 'checkbox', label: 'Climatisation',    defaultValue: true },
-        { name: 'gps',           type: 'checkbox', label: 'GPS',              defaultValue: false },
-        { name: 'bluetooth',     type: 'checkbox', label: 'Bluetooth',        defaultValue: false },
-        { name: 'camera',        type: 'checkbox', label: 'Caméra de recul',  defaultValue: false },
+        { name: 'annee', type: 'number', label: 'Année', min: 2000, max: 2030 },
+        { name: 'kilometrage', type: 'number', label: 'Kilométrage', min: 0 },
+        { name: 'places', type: 'number', label: 'Nombre de places', min: 2, max: 9, defaultValue: 5 },
+        { name: 'portes', type: 'number', label: 'Nombre de portes', min: 2, max: 5, defaultValue: 4 },
+        { name: 'climatisation', type: 'checkbox', label: 'Climatisation', defaultValue: true },
+        { name: 'gps', type: 'checkbox', label: 'GPS', defaultValue: false },
+        { name: 'bluetooth', type: 'checkbox', label: 'Bluetooth', defaultValue: false },
+        { name: 'camera', type: 'checkbox', label: 'Caméra de recul', defaultValue: false },
+        { name: 'toitOuvrant', type: 'checkbox', label: 'Toit ouvrant', defaultValue: false },
+        { name: 'siegesChauffants', type: 'checkbox', label: 'Sièges chauffants', defaultValue: false },
       ],
     },
 
@@ -152,7 +223,7 @@ export const Cars: CollectionConfig = {
       },
     },
 
-    // Galerie d'images - Plusieurs images possibles
+    // Galerie d'images
     {
       name: 'galerie',
       type: 'array',

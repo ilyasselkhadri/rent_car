@@ -12,7 +12,7 @@ export default async function HomePage() {
     collection: 'cars',
     where: { disponible: { equals: true } },
     sort: '-featured',
-    limit: 8,
+    limit: 10000000000000,
     depth: 1,
   })
 

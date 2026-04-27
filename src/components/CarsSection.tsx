@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { 
   X, ChevronLeft, ChevronRight, Fuel, Users, Gauge, Check, 
   SlidersHorizontal, Award, Calendar, DoorOpen, ChevronDown, 
-  ChevronUp, Sparkles 
+  ChevronUp 
 } from 'lucide-react'
 
 // Types
@@ -31,6 +31,8 @@ type Car = {
     gps?: boolean
     bluetooth?: boolean
     camera?: boolean
+    toitOuvrant?: boolean
+    siegesChauffants?: boolean
   }
   featured?: boolean
   disponible?: boolean
@@ -38,11 +40,65 @@ type Car = {
   galerie?: { image?: { url: string }; legende?: string }[]
 }
 
-// Helpers
+// Liste complète des marques
 const brandOptions = [
-  'dacia', 'renault', 'peugeot', 'citroen', 'volkswagen',
-  'toyota', 'hyundai', 'kia', 'ford', 'bmw', 'mercedes', 'audi', 'autre'
+  // Françaises
+  'dacia', 'renault', 'peugeot', 'citroen', 'ds', 'bugatti',
+  // Allemandes
+  'volkswagen', 'bmw', 'mercedes', 'audi', 'porsche', 'opel', 'smart',
+  // Britanniques
+  'landrover', 'rangerover', 'jaguar', 'bentley', 'rollsroyce', 'mini', 'lotus', 'astonmartin', 'mclaren',
+  // Japonaises
+  'toyota', 'honda', 'nissan', 'mazda', 'mitsubishi', 'subaru', 'suzuki', 'lexus', 'infiniti',
+  // Coréennes
+  'hyundai', 'kia', 'genesis',
+  // Américaines
+  'ford', 'chevrolet', 'tesla', 'jeep', 'dodge', 'cadillac', 'lincoln', 'gmc', 'rivian',
+  // Italiennes
+  'fiat', 'ferrari', 'lamborghini', 'maserati', 'alfaromeo', 'lancia',
+  // Espagnoles
+  'seat', 'cupra',
+  // Tchèques
+  'skoda',
+  // Suédoises
+  'volvo', 'polestar',
+  // Chinoises
+  'byd', 'mg', 'greatwall', 'nio', 'xpeng',
+  // Autre
+  'autre'
 ]
+
+// Labels des marques
+const getBrandLabel = (brandValue: string): string => {
+  const brands: Record<string, string> = {
+    // Françaises
+    'dacia': 'Dacia', 'renault': 'Renault', 'peugeot': 'Peugeot', 'citroen': 'Citroën', 'ds': 'DS Automobiles', 'bugatti': 'Bugatti',
+    // Allemandes
+    'volkswagen': 'Volkswagen', 'bmw': 'BMW', 'mercedes': 'Mercedes-Benz', 'audi': 'Audi', 'porsche': 'Porsche', 'opel': 'Opel', 'smart': 'Smart',
+    // Britanniques
+    'landrover': 'Land Rover', 'rangerover': 'Range Rover', 'jaguar': 'Jaguar', 'bentley': 'Bentley', 'rollsroyce': 'Rolls-Royce', 'mini': 'Mini', 'lotus': 'Lotus', 'astonmartin': 'Aston Martin', 'mclaren': 'McLaren',
+    // Japonaises
+    'toyota': 'Toyota', 'honda': 'Honda', 'nissan': 'Nissan', 'mazda': 'Mazda', 'mitsubishi': 'Mitsubishi', 'subaru': 'Subaru', 'suzuki': 'Suzuki', 'lexus': 'Lexus', 'infiniti': 'Infiniti',
+    // Coréennes
+    'hyundai': 'Hyundai', 'kia': 'Kia', 'genesis': 'Genesis',
+    // Américaines
+    'ford': 'Ford', 'chevrolet': 'Chevrolet', 'tesla': 'Tesla', 'jeep': 'Jeep', 'dodge': 'Dodge', 'cadillac': 'Cadillac', 'lincoln': 'Lincoln', 'gmc': 'GMC', 'rivian': 'Rivian',
+    // Italiennes
+    'fiat': 'Fiat', 'ferrari': 'Ferrari', 'lamborghini': 'Lamborghini', 'maserati': 'Maserati', 'alfaromeo': 'Alfa Romeo', 'lancia': 'Lancia',
+    // Espagnoles
+    'seat': 'Seat', 'cupra': 'Cupra',
+    // Tchèques
+    'skoda': 'Skoda',
+    // Suédoises
+    'volvo': 'Volvo', 'polestar': 'Polestar',
+    // Chinoises
+    'byd': 'BYD', 'mg': 'MG', 'greatwall': 'Great Wall', 'nio': 'Nio', 'xpeng': 'Xpeng',
+    // Autre
+    'autre': 'Autre'
+  }
+  return brands[brandValue] || brandValue.charAt(0).toUpperCase() + brandValue.slice(1)
+}
+
 const transmissionOptions = ['manuelle', 'automatique']
 
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
@@ -193,7 +249,7 @@ function CarModal({ car, onClose }: { car: Car; onClose: () => void }) {
           <div className="p-8 space-y-6 overflow-y-auto">
             <div className="animate-in slide-in-from-right-5 duration-500">
               <p className="text-[#c4a35a] text-xs tracking-[4px] uppercase mb-2 font-semibold">
-                {car.brand.toUpperCase()} · {cap(car.type)}
+                {getBrandLabel(car.brand)} · {cap(car.type)}
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-800 leading-tight"
                 style={{ fontFamily: 'Georgia, serif' }}>
@@ -299,6 +355,8 @@ function CarModal({ car, onClose }: { car: Car; onClose: () => void }) {
                   { label: 'GPS', v: car.details?.gps },
                   { label: 'Bluetooth', v: car.details?.bluetooth },
                   { label: 'Caméra recul', v: car.details?.camera },
+                  { label: 'Toit ouvrant', v: car.details?.toitOuvrant },
+                  { label: 'Sièges chauffants', v: car.details?.siegesChauffants },
                 ].map((eq, i) => (
                   <div
                     key={i}
@@ -351,7 +409,7 @@ export default function CarsSection({ initialCars }: { initialCars: Car[] }) {
   const [cars, setCars] = useState<Car[]>(initialCars)
   const [loading, setLoading] = useState(false)
   const [selected, setSelected] = useState<Car | null>(null)
-  const [filterOpen, setFilterOpen] = useState(true)
+  const [filterOpen, setFilterOpen] = useState(false)
 
   // Filtrage
   useEffect(() => {
@@ -395,6 +453,22 @@ export default function CarsSection({ initialCars }: { initialCars: Car[] }) {
   }
 
   const hasFilter = !!(nom || brand || transmission || kilometrageMax || anneeMin || anneeMax)
+
+  // Grouper les marques par catégorie pour le select
+  const brandGroups = [
+    { label: "Françaises", brands: ['dacia', 'renault', 'peugeot', 'citroen', 'ds', 'bugatti'] },
+    { label: "Allemandes", brands: ['volkswagen', 'bmw', 'mercedes', 'audi', 'porsche', 'opel', 'smart'] },
+    { label: "Britanniques", brands: ['landrover', 'rangerover', 'jaguar', 'bentley', 'rollsroyce', 'mini', 'lotus', 'astonmartin', 'mclaren'] },
+    { label: "Japonaises", brands: ['toyota', 'honda', 'nissan', 'mazda', 'mitsubishi', 'subaru', 'suzuki', 'lexus', 'infiniti'] },
+    { label: "Coréennes", brands: ['hyundai', 'kia', 'genesis'] },
+    { label: "Américaines", brands: ['ford', 'chevrolet', 'tesla', 'jeep', 'dodge', 'cadillac', 'lincoln', 'gmc', 'rivian'] },
+    { label: "Italiennes", brands: ['fiat', 'ferrari', 'lamborghini', 'maserati', 'alfaromeo', 'lancia'] },
+    { label: "Espagnoles", brands: ['seat', 'cupra'] },
+    { label: "Tchèques", brands: ['skoda'] },
+    { label: "Suédoises", brands: ['volvo', 'polestar'] },
+    { label: "Chinoises", brands: ['byd', 'mg', 'greatwall', 'nio', 'xpeng'] },
+    { label: "Autres", brands: ['autre'] },
+  ]
 
   return (
     <>
@@ -459,7 +533,7 @@ export default function CarsSection({ initialCars }: { initialCars: Car[] }) {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                   <div>
                     <label className="block text-xs tracking-[2px] uppercase text-gray-500 mb-2 font-medium">
-                      Nom du véhicule
+                      Nom
                     </label>
                     <input 
                       type="text" 
@@ -484,7 +558,13 @@ export default function CarsSection({ initialCars }: { initialCars: Car[] }) {
                         transition-all duration-200 bg-white text-gray-800"
                     >
                       <option value="">Toutes les marques</option>
-                      {brandOptions.map(b => <option key={b} value={b}>{cap(b)}</option>)}
+                      {brandGroups.map((group) => (
+                        <optgroup key={group.label} label={group.label}>
+                          {group.brands.map(b => (
+                            <option key={b} value={b}>{getBrandLabel(b)}</option>
+                          ))}
+                        </optgroup>
+                      ))}
                     </select>
                   </div>
                   
@@ -645,7 +725,7 @@ export default function CarsSection({ initialCars }: { initialCars: Car[] }) {
 
                     <div className="p-5">
                       <p className="text-[#c4a35a] text-[10px] tracking-[3px] uppercase mb-2 font-semibold">
-                        {car.brand.toUpperCase()}
+                        {getBrandLabel(car.brand).toUpperCase()}
                       </p>
                       <h3 className="text-gray-800 mb-2 leading-snug font-bold text-lg" 
                           style={{ fontFamily: 'Georgia, serif' }}>
