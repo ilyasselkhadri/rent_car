@@ -161,7 +161,7 @@ function CarModal({ car, onClose }: { car: Car; onClose: () => void }) {
   }, [])
 
   const handleReserver = () => {
-    window.open('https://wa.me/212660644810', '_blank')
+    window.open('https://wa.me/212666444655', '_blank')
   }
 
   return (
