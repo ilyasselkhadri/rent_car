@@ -31,10 +31,13 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URL || '',
-    },
-  }),
+  pool: {
+    connectionString: process.env.DATABASE_URL || '',
+    max: 30, 
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 2000,
+  },
+}),
   sharp,
   plugins: [
     s3Storage({
